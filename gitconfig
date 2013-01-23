@@ -1,0 +1,13 @@
+[user]
+    name = Billy Keyes
+    email = bluekeyes@gmail.com
+
+[core]
+    editor = "vim"
+
+[color]
+    ui = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
