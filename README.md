@@ -30,12 +30,10 @@ The installation script requires `zsh`, so install that and set it as your shell
 
 The script will clone this repository and its submodules, then symlink all the files into the right places.
 
-Using `curl`
-++++++++++++
+### Using `curl`
 
 `curl -L https://github.com/bluekeyes/dotosaurus/raw/master/install.zsh | zsh`
 
-Using `wget`
-++++++++++++
+### Using `wget`
 
 `wget --no-check-certificate https://github.com/bluekeyes/dotosaurus/raw/master/install.zsh -O - | zsh`
