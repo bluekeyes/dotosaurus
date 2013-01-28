@@ -11,3 +11,8 @@
     diff = auto
     interactive = auto
     status = auto
+
+[alias]
+    st = status -uall
+    br = branch
+    co = checkout
