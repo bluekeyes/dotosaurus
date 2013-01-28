@@ -1,3 +1,8 @@
+Dotosaurus
+==========
+
+Protecting dotfile and such from extinction by meteorite (or harddrive failure).
+
 ```
  _____________
 < Dotosaurus! >
@@ -17,11 +22,6 @@
                      |     /        |     /     ~-.     `-. _  _  _
                      |_____|        |_____|         ~ - . _ _ _ _ _>
 ```
-
-Dotosaurus
-==========
-
-Protecting dotfile and such from extinction by meteorite (or harddrive failure).
 
 Installation
 ------------
