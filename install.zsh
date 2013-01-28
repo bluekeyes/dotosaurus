@@ -4,7 +4,7 @@
 # Based on the oh-my-zsh installation script
 #
 
-DOT='~/.dotosaurus'
+DOT=~/.dotosaurus
 if [ -d ${DOT} ]; then
     echo "Dotosaurus is already installed. Delete your ${DOT} directory and try again."
     exit 1
@@ -30,14 +30,15 @@ echo "Initalizing submodules..."
 echo "Installing files..."
 
 # Link custom scripts into oh-my-zsh
+mkdir -p zsh/oh-my-zsh/custom
 setopt extendedglob
 for script in zsh/**/*.zsh~zsh/oh-my-zsh/*(N); do
-    ln -s ${script} zsh/oh-my-zsh/custom/$(basename ${script})
+    ln -s ${DOT}/${script} ${DOT}/zsh/oh-my-zsh/custom/$(basename ${script})
 done
 
 # Link all files with no extensions into the home directory
 for file in *~*.*(.N); do
-    ln -s ${file} ~/.$(basename ${file})
+    ln -s ${DOT}/${file} ~/.$(basename ${file})
 done
 
 echo "Dotosaurus is installed! Restart your shell and enjoy!"
