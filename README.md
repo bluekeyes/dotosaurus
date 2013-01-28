@@ -1,7 +1,7 @@
 Dotosaurus
 ==========
 
-Protecting dotfile and such from extinction by meteorite (or harddrive failure).
+Protecting dotfiles and such from extinction by meteorite (or harddrive failure).
 
 ```
  _____________
