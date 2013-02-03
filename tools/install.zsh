@@ -36,8 +36,11 @@ for script in zsh/**/*.zsh~zsh/oh-my-zsh/*(N); do
     ln -s ${DOT}/${script} ${DOT}/zsh/oh-my-zsh/custom/$(basename ${script})
 done
 
-# Link all files with no extensions into the home directory
-for file in *~*.*(.N); do
+echo "Building configuration files..."
+python tools/build.py
+
+# Link all build files into the home directory
+for file in build/*(.N); do
     ln -s ${DOT}/${file} ~/.$(basename ${file})
 done
 

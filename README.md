@@ -32,8 +32,8 @@ The script will clone this repository and its submodules, then symlink all the f
 
 ### Using `curl`
 
-`curl -L https://github.com/bluekeyes/dotosaurus/raw/master/install.zsh | zsh`
+`curl -L https://github.com/bluekeyes/dotosaurus/raw/master/tools/install.zsh | zsh`
 
 ### Using `wget`
 
-`wget --no-check-certificate https://github.com/bluekeyes/dotosaurus/raw/master/install.zsh -O - | zsh`
+`wget --no-check-certificate https://github.com/bluekeyes/dotosaurus/raw/master/tools/install.zsh -O - | zsh`

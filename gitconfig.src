@@ -1,6 +1,6 @@
 [user]
-    name = Billy Keyes
-    email = bluekeyes@gmail.com
+    name = %git_name
+    email = %git_email
 
 [core]
     editor = "vim"
@@ -16,3 +16,6 @@
     st = status -uall
     br = branch
     co = checkout
+    pk = cherry-pick -xe
+    df = diff
+    dfc = diff --cached

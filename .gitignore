@@ -1,0 +1,4 @@
+*.pyc
+
+/build
+/custom
