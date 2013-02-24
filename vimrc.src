@@ -1,0 +1,166 @@
+" Many, Many Vim Options Copied From Many Places
+"
+"   sensible.vim - https://github.com/tpope/vim-sensible
+"   Coming Home to Vim - http://stevelosh.com/blog/2010/09/coming-home-to-vim/
+"
+" ---------------------------------------------------------------------
+
+autocmd!            " Remove all defined autocmds - duplicates are bad!
+set nocompatible    " vi is for old people
+
+" Load pathogen and plugins
+runtime bundle/pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+
+" Yay for syntax highlighting and sensible filetype handling
+syntax on
+filetype plugin indent on
+
+" I don't use modelines and apparently there are security problems
+set modelines=0
+
+" Bells are annoying
+set noerrorbells
+
+set backspace=indent,eol,start
+set complete-=i
+
+" Visually wrap long lines at break boundaries....
+set wrap
+set linebreak
+
+" Brace and parenthesis matching
+set showmatch
+set matchtime=3
+
+" Indentation settings, tabs suck!
+set autoindent
+set smarttab
+set expandtab
+set shiftround
+
+set shiftwidth=4
+set softtabstop=4
+set tabstop=4
+
+set nrformats-=octal
+
+set ttimeout
+set ttimeoutlen=50
+
+" Search & Replace
+set incsearch
+set ignorecase
+set smartcase
+set gdefault
+set hlsearch
+noremap <silent> <C-L> :nohlsearch<CR><C-L>
+
+" Configure the status line
+set laststatus=2
+set ruler
+set showcmd
+set showmode
+
+" Setup wildcard completion for files and stuff
+set wildmenu
+set wildmode=list:longest,full
+
+" Enable line numbers and use relative numbers where possible
+set number
+if exists('+relativenumber')
+    set relativenumber
+endif
+
+set scrolloff=3
+set sidescrolloff=5
+set display+=lastline
+
+" Let vim use UTF-8 because non-ASCII characters are cool
+set encoding=utf-8
+
+set listchars=tab:>\ ,trail:-,extends:>,precedes:<,nbsp:+
+if &termencoding ==# 'utf-8' || &encoding ==# 'utf-8'
+    let &listchars = "tab:\u21e5 ,trail:\u2423,extends:\u21c9,precedes:\u21c7,nbsp:\u26ad"
+endif
+
+set autoread
+set autowrite
+
+set history=1000
+set viminfo^=!
+
+" Store swap files, backups, and undo history in a common location
+let s:dir = has('win32') ? '~/Application Data/Vim' : '~/.local/share/vim'
+if isdirectory(expand(s:dir))
+    let &directory = expand(s:dir) . '/swap//,' . &directory
+    let &backupdir = expans(s:dir) . '/backup//,' . &backupdir
+    " Using an undo file only works in Vim 7.3+
+    if exists('+undodir')
+        let &undodir = expand(s:dir) . '/undo//,' . &undodir
+    endif
+endif
+
+" Using an undo file only works in Vim 7.3+
+if exists('+undofile')
+    set undofile
+endif
+
+" Allow color schemes to do bright colors without forcing bold
+set t_Co=16
+
+" Exclude hidden files, temp files, and tags from network reads/writes
+let g:netrw_list_hide = '^\.,\~$,^tags$'
+
+" Set up buffers to work like tabs in other editors
+set hidden
+
+" Make Y match C and D
+nnoremap Y y$
+
+" Disable arrow keys to force me to use Vim correctly
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+inoremap <left> <nop>
+inoremap <right> <nop>
+
+" Enable full mouse support, because it's handy
+set mouse=a
+
+" Make j/k move by screen line, not file line
+nnoremap j gj
+nnoremap k gk
+
+" Tab is easier to hit to jump between {}/() than %
+nnoremap <tab> %
+vnoremap <tab> %
+
+" Remove all trailing whitespace in a file
+nnoremap <leader>T :%s/\s\+$//<cr>:let @/=''<cr>
+
+" Enable the soloarized color scheme
+set background=dark
+colorscheme solarized
+
+" Don't normally wrap 'text', but do wrap comments at 80 chars
+" Also resepect existing long lines and repeat comment leaders when creating
+" new lines in insert mode
+set formatoptions=cqrnl
+set textwidth=79
+
+" Treat asterisk bulleted lists as comments for the sake of formatting
+set comments+=fb:*
+
+"----------------------------------
+" File-type Specific Options
+"----------------------------------
+
+" Wrap human-readable text files at 72 characters
+autocmd FileType mail,human set formatoptions+=t textwidth=72
+" Makefiles are fantastic...
+autocmd FileType make set noexpandtab shiftwidth=8
+
