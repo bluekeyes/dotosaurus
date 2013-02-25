@@ -21,10 +21,11 @@ git submodule update || {
 }
 
 echo "Rebuilding config files..."
-rm -r build
+rm -rf build
+mkdir build
 python tools/build.py || {
     echo "Failed to build config files."
-    rm -r build
+    rm -rf build
     exit 1
 }
 
