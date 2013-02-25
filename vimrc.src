@@ -5,8 +5,10 @@
 "
 " ---------------------------------------------------------------------
 
-autocmd!            " Remove all defined autocmds - duplicates are bad!
-set nocompatible    " vi is for old people
+" Remove all autcmds - duplicates are bad!
+autocmd!
+" vi compatibility is for old people
+set nocompatible
 
 " Load pathogen and plugins
 runtime bundle/pathogen/autoload/pathogen.vim
@@ -94,7 +96,7 @@ set viminfo^=!
 let s:dir = has('win32') ? '~/Application Data/Vim' : '~/.local/share/vim'
 if isdirectory(expand(s:dir))
     let &directory = expand(s:dir) . '/swap//,' . &directory
-    let &backupdir = expans(s:dir) . '/backup//,' . &backupdir
+    let &backupdir = expand(s:dir) . '/backup//,' . &backupdir
     " Using an undo file only works in Vim 7.3+
     if exists('+undodir')
         let &undodir = expand(s:dir) . '/undo//,' . &undodir
