@@ -5,7 +5,7 @@ import string
 from os import path
 
 class DotosaurusTemplate(string.Template):
-    delimiter = '%'
+    delimiter = '$::'
 
 def parse_props(props_path):
     props = {}
