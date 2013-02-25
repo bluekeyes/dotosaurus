@@ -44,4 +44,16 @@ for file in build/*(.N); do
     ln -s ${DOT}/${file} ~/.$(basename ${file})
 done
 
+# Link the vim directory as .vim
+if [ -d ~/.vim ]; then
+    echo "Backing up .vim directory in .vim.bak"
+    mv ~/.vim ~/.vim.bak
+fi
+ln -s ${DOT}/vim ~/.vim
+
+# Make vim temp directories if they don't exis
+mkdir -p ~/.local/share/vim/swap
+mkdir -p ~/.local/share/vim/undo
+mkdir -p ~/.local/share/vim/backup
+
 echo "Dotosaurus is installed! Restart your shell and enjoy!"
