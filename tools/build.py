@@ -43,7 +43,7 @@ def build(template, work_dir):
 
 
 if __name__ == "__main__":
-    dotosaurus = os.environ.get('DOTOSAURUS', '~/.dotosaurus')
+    dotosaurus = os.environ.get('DOTOSAURUS', os.path.expanduser('~/.dotosaurus'))
     templates = [path.join(dotosaurus, t) for t in os.listdir(dotosaurus) if t.endswith('.src')]
     for template in templates:
         print "Processing template at {0}...".format(template)
