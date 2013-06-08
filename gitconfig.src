@@ -1,6 +1,6 @@
 [user]
-    name = $::{git_name}
-    email = $::{git_email}
+    name = {{CUSTOM}}
+    email = {{CUSTOM}}
 
 [core]
     editor = "vim"

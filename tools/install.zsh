@@ -27,6 +27,20 @@ echo "Initalizing submodules..."
     exit 1
 }
 
+# Set up a new branch for local customizations
+echo
+echo "Setting up the local branch..."
+/usr/bin/env git checkout -b local origin/master
+
+echo "Customizing configuration files...."
+python tools/customize.py
+
+echo "Replacing original files with custom versions..."
+for file in *.src.custom(.N); do
+    mv ${DOT}/${file} ${DOT}/$(basename ${file}).src
+done
+
+echo
 echo "Installing files..."
 
 # Link custom scripts into oh-my-zsh
@@ -36,11 +50,8 @@ for script in zsh/**/*.zsh~zsh/oh-my-zsh/*(N); do
     ln -s ${DOT}/${script} ${DOT}/zsh/oh-my-zsh/custom/$(basename ${script})
 done
 
-echo "Building configuration files..."
-python tools/build.py
-
-# Link all build files into the home directory
-for file in build/*(.N); do
+# Link all dot files into the home directory
+for file in *.src(.N); do
     ln -s ${DOT}/${file} ~/.$(basename ${file})
 done
 
@@ -56,4 +67,6 @@ mkdir -p ~/.local/share/vim/swap
 mkdir -p ~/.local/share/vim/undo
 mkdir -p ~/.local/share/vim/backup
 
-echo "Dotosaurus is installed! Restart your shell and enjoy!"
+echo
+echo "Dotosaurus is installed!"
+echo "Commit any customizations to the 'local' branch, then restart your shell and enjoy!"
