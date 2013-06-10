@@ -1,6 +1,6 @@
 [user]
-    name = {{CUSTOM}}
-    email = {{CUSTOM}}
+    name = Billy Keyes
+    email = bluekeyes@gmail.com
 
 [core]
     editor = "vim"
