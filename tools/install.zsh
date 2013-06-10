@@ -6,42 +6,28 @@
 
 DOT=~/.dotosaurus
 if [ -d ${DOT} ]; then
-    echo "Dotosaurus is already installed. Delete your ${DOT} directory and try again."
+    echo "\033[0;31mDotosaurus is already installed. Delete ${DOT} and try again.\033[0m"
     exit 1
 fi
 
-echo "Cloning Dotosaurus..."
+echo "\033[0;32mCloning Dotosaurus...\033[0m"
 hash git >/dev/null && /usr/bin/env git clone https://github.com/bluekeyes/dotosaurus.git ${DOT} || {
-    echo "git not installed"
+    echo "\033[0;31mgit not installed\033[0m"
     exit 1
 }
 
 # Let's work from the repository for the rest of the install
-echo "Switching to Dotosaurus directory..."
+echo "\033[0;32mSwitching to Dotosaurus directory...\033[0m"
 cd ${DOT}
 
 # Initialize Dotosaurus submodules
-echo "Initalizing submodules..."
+echo "\033[0;32mInitalizing submodules...\033[0m"
 /usr/bin/env git submodule init && /usr/bin/env git submodule update || {
-    echo "Failed to setup Dotosaurus submodules!"
+    echo "\033[0;31mFailed to setup Dotosaurus submodules!\033[0m"
     exit 1
 }
 
-# Set up a new branch for local customizations
-echo
-echo "Setting up the local branch..."
-/usr/bin/env git checkout -b local origin/master
-
-echo "Customizing configuration files...."
-python tools/customize.py
-
-echo "Replacing original files with custom versions..."
-for file in *.src.custom(.N); do
-    mv ${DOT}/${file} ${DOT}/$(basename ${file}).src
-done
-
-echo
-echo "Installing files..."
+echo "\033[0;32mInstalling files...\033[0m"
 
 # Link custom scripts into oh-my-zsh
 mkdir -p zsh/oh-my-zsh/custom
@@ -57,7 +43,7 @@ done
 
 # Link the vim directory as .vim
 if [ -d ~/.vim ]; then
-    echo "Backing up .vim directory in .vim.bak"
+    echo "\033[0;33mBacking up .vim directory in .vim.bak\033[0m"
     mv ~/.vim ~/.vim.bak
 fi
 ln -s ${DOT}/vim ~/.vim
@@ -67,6 +53,13 @@ mkdir -p ~/.local/share/vim/swap
 mkdir -p ~/.local/share/vim/undo
 mkdir -p ~/.local/share/vim/backup
 
-echo
-echo "Dotosaurus is installed!"
+# Set up a new branch for local customizations
+echo "\033[0;32mSetting up the local branch...\033[0m"
+/usr/bin/env git checkout -b local origin/master
+
+echo "\n\n \033[0;34mDotosaurus is installed!\033[0m"
 echo "Commit any customizations to the 'local' branch, then restart your shell and enjoy!"
+
+echo "\n\n You may want to customize:"
+echo "\t gitconfifg: core.name"
+echo "\t gitconfifg: core.email"
