@@ -157,12 +157,18 @@ set textwidth=79
 " Treat asterisk bulleted lists as comments for the sake of formatting
 set comments+=fb:*
 
+" Make navigating between splits require fewer keystrokes
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+
 "----------------------------------
 " File-type Specific Options
 "----------------------------------
 
 " Wrap human-readable text files at 72 characters
-autocmd FileType mail,human set formatoptions+=t textwidth=72
+autocmd FileType mail,human,gitconfig set formatoptions+=t textwidth=72
 " Makefiles are fantastic...
 autocmd FileType make set noexpandtab shiftwidth=8
 
