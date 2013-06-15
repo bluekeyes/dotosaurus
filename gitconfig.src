@@ -19,3 +19,7 @@
     pk = cherry-pick -xe
     df = diff
     dfc = diff --cached
+    amend = commit --amend
+    l = log
+    ln = log --name-only
+    lp = log -p
