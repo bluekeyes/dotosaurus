@@ -157,6 +157,9 @@ set textwidth=79
 " Treat asterisk bulleted lists as comments for the sake of formatting
 set comments+=fb:*
 
+" Make horizontal splits easier to create
+nnoremap <leader>w <C-w>s<C-w>l
+
 " Make navigating between splits require fewer keystrokes
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
