@@ -171,7 +171,7 @@ nnoremap <C-l> <C-w>l
 "----------------------------------
 
 " Wrap human-readable text files at 72 characters
-autocmd FileType mail,human,gitconfig set formatoptions+=t textwidth=72
+autocmd FileType mail,human,gitcommit set formatoptions+=t textwidth=72
 " Makefiles are fantastic...
 autocmd FileType make set noexpandtab shiftwidth=8
 
