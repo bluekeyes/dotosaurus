@@ -1,0 +1,94 @@
+#!/usr/bin/python
+
+import os
+import sys
+import glob
+import shutil
+import argparse
+
+def info(msg):
+    print '[ \033[34m..\033[0m ] ' + msg
+
+def success(msg):
+    print '[ \033[32mOK\033[0m ] ' + msg
+
+def fail(msg):
+    print '[ \033[31mFAIL\033[0m ] ' + msg
+    sys.exit(1)
+
+def find_sources():
+    return map(os.path.abspath, glob.glob('*.ln') + glob.glob('*/*.ln'))
+
+def remove(path):
+    if os.path.islink(path) or os.path.isfile(path):
+        os.remove(path)
+    else:
+        shutil.rmtree(path)
+    success('removed {0}'.format(path))
+
+def backup(path):
+    os.rename(path, path + '.bak')
+    success('moved {0} to {0}.bak'.format(path))
+
+def create_default_dir(path):
+    if not os.path.isdir(path):
+        os.makedirs(path)
+        success('created {0}'.format(path))
+    else:
+        info('skipped {0}, it already exists'.format(path))
+
+def install(args):
+    info('installing dotosaurus')
+
+    links = []
+    for source in find_sources():
+        name = '.' + os.path.splitext(os.path.basename(source))[0]
+        dest = os.path.join(os.path.expanduser('~'), name)
+        if not args.conflict and os.path.lexists(dest):
+            fail('{0} exists, run with --force or --backup'.format(dest))
+        else:
+            links.append((source, dest))
+
+    info('linking files and directories')
+    for source, dest in links:
+        if os.path.lexists(dest):
+            args.conflict(dest)
+
+        os.symlink(source, dest)
+        success('linked {0} to {1}'.format(os.path.relpath(source), dest))
+
+    info('creating default directories')
+    create_default_dir(os.path.expanduser('~/.local/share/vim/swap'))
+    create_default_dir(os.path.expanduser('~/.local/share/vim/undo'))
+    create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
+
+    success('dotosaurus installed')
+
+def update(args):
+    pass
+
+def make_arg_parser():
+    parser = argparse.ArgumentParser(description='install and update dotosaurus')
+    subparsers = parser.add_subparsers(help='actions')
+
+    # installation
+    install_parser = subparsers.add_parser('install', description='install dotosaurus')
+    install_parser.set_defaults(action=install, conflict=None)
+
+    conflict_group = install_parser.add_mutually_exclusive_group()
+    conflict_group.add_argument('-f', '--force',
+                                action='store_const', const=remove, dest='conflict',
+                                help='overwrite existing files')
+    conflict_group.add_argument('-b', '--backup',
+                                action='store_const', const=backup, dest='conflict',
+                                help='backup existing files')
+
+    # update
+    update_parser = subparsers.add_parser('update', description='update dotosaurus')
+    update_parser.set_defaults(action=update)
+
+    return parser
+
+if __name__ == '__main__':
+    args = make_arg_parser().parse_args()
+    args.action(args)
