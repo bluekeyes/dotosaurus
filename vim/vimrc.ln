@@ -68,10 +68,21 @@ set showmode
 set wildmenu
 set wildmode=list:longest,full
 
-" Enable line numbers and use relative numbers where possible
+" Enable line numbers
 set number
+
+" If relative number are supported, add a function to toggle them
 if exists('+relativenumber')
-    set relativenumber
+    function! NumberModeToggle()
+        if &l:number ==# 'nonumber'
+            setlocal number
+        else
+            setlocal relativenumber
+        endif
+    endfunction
+    nnoremap <silent> <leader>n :call NumberModeToggle()<cr>
+else
+    nnoremap <silent> <leader>n <nop>
 endif
 
 set scrolloff=3
