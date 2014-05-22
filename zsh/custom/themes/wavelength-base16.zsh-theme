@@ -46,5 +46,3 @@ ZSH_THEME_GIT_PROMPT_UNKNOWN=" ${fg_base16[0E]}×"
 
 ZSH_THEME_TERM_TAB_TITLE_IDLE='%15<..<${PWD/#$HOME/~}%<<'
 ZSH_THEME_TERM_TITLE_IDLE='%n@%m: ${PWD/#$HOME/~}'
-
-# Cleanup
