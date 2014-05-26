@@ -2,21 +2,25 @@ export DOTOSAURUS=~/.dotosaurus
 
 export ZSH=${DOTOSAURUS}/zsh/oh-my-zsh
 export ZSH_CUSTOM=${DOTOSAURUS}/zsh/custom
-
-export ZSH_THEME="wavelength"
 export DISABLE_AUTO_UPDATE="true"
 
-plugins=(solarized) 
+plugins=(base16)
+
+export ZSH_BASE16_COLORSPACE="256"
+export ZSH_THEME="wavelength-base16"
 
 source ${ZSH}/oh-my-zsh.sh
 
-# Set up Solarized colors for ls  -------------------------------------
+# Install base16 colors into the 256 colorspace
+source ${DOTOSAURUS}/colors/base16-tomorrow/shell.sh
+
+# Set up base16 colors for ls
 eval "$(dircolors ${DOTOSAURUS}/coreutils/dircolors-solarized/dircolors.ansi-dark)"
 
-# Environment Variables -----------------------------------------------
+# Environment Variables
 export EDITOR='vim'
 
-# PATH changes --------------------------------------------------------
+# PATH changes
 export PATH="${DOTOSAURUS}/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
@@ -24,7 +28,7 @@ export PATH="${HOME}/bin:${PATH}"
 # Aliases in $ZSH_CUSTOM/aliases.zsh
 # ---------------------------------------------------------------------
 
-# Include local settings ----------------------------------------------
+# Include local settings
 if [ -f ~/.zshrc.local ]; then
     source ~/.zshrc.local
 fi

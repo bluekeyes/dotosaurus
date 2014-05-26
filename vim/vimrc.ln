@@ -157,7 +157,8 @@ nnoremap <leader>T :%s/\s\+$//<cr>:let @/=''<cr>
 
 " Enable the soloarized color scheme
 set background=dark
-colorscheme solarized
+let base16colorspace=256
+colorscheme base16-tomorrow
 
 " Don't normally wrap 'text', but do wrap comments at 80 chars
 " Also resepect existing long lines and repeat comment leaders when creating
