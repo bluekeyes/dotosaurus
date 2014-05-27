@@ -41,6 +41,10 @@ def create_default_dir(path):
     else:
         info('skipped {0}, it already exists'.format(path))
 
+def has_branch(branch):
+    cmd = ['git', 'show-ref', '--verify', '--quiet', 'refs/heads/{}'.format(branch)]
+    return not subprocess.call(cmd):
+
 def install(args):
     info('installing dotosaurus')
 
@@ -66,7 +70,7 @@ def install(args):
     create_default_dir(os.path.expanduser('~/.local/share/vim/undo'))
     create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
 
-    if subprocess.call(['git', 'show-ref', '--verify', '--quiet', 'refs/heads/local']):
+    if not has_branch('local'):
         info('creating branch "local"')
         if subprocess.call(['git', 'checkout', '-b', 'local']):
             die('failed to create branch "local"')
@@ -87,7 +91,9 @@ def update(args):
             die('failed to fetch changed from origin')
 
         info('switching to branch "master"')
-        if subprocess.call(['git', 'checkout', 'refs/heads/master']):
+        if not has_branch('master'):
+            die('branch "master" does not exists')
+        if subprocess.call(['git', 'checkout', 'master']):
             die('failed to switch to branch "master"')
 
         info('merging "origin/master" into "master"')
@@ -98,7 +104,9 @@ def update(args):
             success('updated branch "master"')
 
         info('switching to branch "local"')
-        if subprocess.call(['git', 'checkout', 'refs/heads/local']):
+        if not has_branch('local'):
+            die('branch "local" does not exists')
+        if subprocess.call(['git', 'checkout', 'local']):
             die('failed to switch to branch "local"')
 
         info('rebasing branch "local" on top of "origin/master"')
@@ -125,7 +133,7 @@ def update(args):
     else:
         success('updated submodules')
 
-    sucess('update complete')
+    success('update complete')
 
 def make_arg_parser():
     parser = argparse.ArgumentParser(description='install and update dotosaurus')
