@@ -43,7 +43,7 @@ def create_default_dir(path):
 
 def has_branch(branch):
     cmd = ['git', 'show-ref', '--verify', '--quiet', 'refs/heads/{}'.format(branch)]
-    return not subprocess.call(cmd):
+    return not subprocess.call(cmd)
 
 def install(args):
     info('installing dotosaurus')
