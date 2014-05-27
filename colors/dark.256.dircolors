@@ -1,0 +1,299 @@
+# Base16 dark theme, 256 color variant
+# Designed for dircolors (GNU coreutils) 5.97
+#
+# Based on dircolors-solarized, by seebi
+# https://github.com/seebi/dircolors-solarized
+
+# COLOR needs one of these arguments: 'tty' colorizes output to ttys, but not
+# pipes. 'all' adds color characters to all output. 'none' shuts colorization
+# off.
+COLOR tty
+
+# Below, there should be one TERM entry for each termtype that is colorizable
+TERM ansi
+TERM color_xterm
+TERM color-xterm
+TERM con132x25
+TERM con132x30
+TERM con132x43
+TERM con132x60
+TERM con80x25
+TERM con80x28
+TERM con80x30
+TERM con80x43
+TERM con80x50
+TERM con80x60
+TERM cons25
+TERM console
+TERM cygwin
+TERM dtterm
+TERM Eterm
+TERM eterm-color
+TERM gnome
+TERM gnome-256color
+TERM jfbterm
+TERM konsole
+TERM kterm
+TERM linux
+TERM linux-c
+TERM mach-color
+TERM mlterm
+TERM nxterm
+TERM putty
+TERM rxvt
+TERM rxvt-256color
+TERM rxvt-cygwin
+TERM rxvt-cygwin-native
+TERM rxvt-unicode
+TERM rxvt-unicode256
+TERM rxvt-unicode-256color
+TERM screen
+TERM screen-256color
+TERM screen-256color-bce
+TERM screen-256color-s
+TERM screen-bce
+TERM screen-w
+TERM screen.linux
+TERM screen.xterm-new
+TERM vt100
+TERM xterm
+TERM xterm-new
+TERM xterm-16color
+TERM xterm-256color
+TERM xterm-88color
+TERM xterm-color
+TERM xterm-debian
+
+# EIGHTBIT, followed by '1' for on, '0' for off. (8-bit output)
+EIGHTBIT 1
+
+#############################################################################
+### By file type
+
+# global default
+NORMAL 00
+# normal file
+FILE 00
+# directory
+DIR 36
+# symbolic link
+LINK 35
+
+# pipe, socket, block device, character device
+FIFO 37;48;5;19
+SOCK 37;48;5;19
+DOOR 37;48;5;19 # Solaris 2.5 and later
+BLK  37;48;5;19
+CHR  34;48;5;19
+
+
+#############################################################################
+### By file attributes
+
+# Orphaned symlinks (white on red)
+ORPHAN  38;5;15;41
+# ... and the files that orphaned symlinks point to (white on red)
+MISSING 38;5;15;41
+
+# files with execute permission
+EXEC 33  # Unix
+.cmd 33  # Win
+.exe 33  # Win
+.com 33  # Win
+.bat 33  # Win
+.reg 33  # Win
+.app 33  # OSX
+
+#############################################################################
+### By extension
+
+# List any file extensions like '.gz' or '.tar' that you would like ls
+# to colorize below. Put the extension, a space, and the color init string.
+# (and any comments you want to add after a '#')
+
+### Text formats
+
+# Text that we can edit with a regular editor
+.txt 32
+.org 32
+.md  32
+.mkd 32
+
+# Source text
+.h      32
+.c      32
+.C      32
+.cc     32
+.cpp    32
+.cxx    32
+.objc   32
+.sh     32
+.csh    32
+.zsh    32
+.el     32
+.vim    32
+.java   32
+.pl     32
+.pm     32
+.py     32
+.rb     32
+.hs     32
+.php    32
+.htm    32
+.html   32
+.xml    32
+.rdf    32
+.css    32
+.scss   32
+.less   32
+.js     32
+.coffee 32
+.json   32
+.man    32
+.l      32
+.n      32
+.p      32
+.pod    32
+.tex    32
+
+### Multimedia formats
+
+# Image
+.bmp  38;5;17
+.cgm  38;5;17
+.dl   38;5;17
+.dvi  38;5;17
+.emf  38;5;17
+.eps  38;5;17
+.gif  38;5;17
+.jpeg 38;5;17
+.jpg  38;5;17
+.JPG  38;5;17
+.mng  38;5;17
+.pbm  38;5;17
+.pcx  38;5;17
+.pdf  38;5;17
+.pgm  38;5;17
+.png  38;5;17
+.ppm  38;5;17
+.pps  38;5;17
+.ppsx 38;5;17
+.ps   38;5;17
+.svg  38;5;17
+.svgz 38;5;17
+.tga  38;5;17
+.tif  38;5;17
+.tiff 38;5;17
+.xbm  38;5;17
+.xcf  38;5;17
+.xpm  38;5;17
+.xwd  38;5;17
+.xwd  38;5;17
+.yuv  38;5;17
+
+# Audio
+.aac  38;5;17
+.au   38;5;17
+.flac 38;5;17
+.mid  38;5;17
+.midi 38;5;17
+.mka  38;5;17
+.mp3  38;5;17
+.mpa  38;5;17
+.mpeg 38;5;17
+.mpg  38;5;17
+.ogg  38;5;17
+.ra   38;5;17
+.wav  38;5;17
+
+# Video
+.anx  38;5;17
+.asf  38;5;17
+.avi  38;5;17
+.axv  38;5;17
+.flc  38;5;17
+.fli  38;5;17
+.flv  38;5;17
+.gl   38;5;17
+.m2v  38;5;17
+.m4v  38;5;17
+.mkv  38;5;17
+.mov  38;5;17
+.mp4  38;5;17
+.mp4v 38;5;17
+.mpeg 38;5;17
+.mpg  38;5;17
+.nuv  38;5;17
+.ogm  38;5;17
+.ogv  38;5;17
+.ogx  38;5;17
+.qt   38;5;17
+.rm   38;5;17
+.rmvb 38;5;17
+.swf  38;5;17
+.vob  38;5;17
+.wmv  38;5;17
+
+### Misc
+
+# Binary document formats and multimedia source
+.doc  31
+.docx 31
+.rtf  31
+.dot  31
+.dotx 31
+.xls  31
+.xlsx 31
+.ppt  31
+.pptx 31
+.fla  31
+.psd  31
+
+# Archives, compressed
+.7z   38;5;16
+.apk  38;5;16
+.arj  38;5;16
+.bin  38;5;16
+.bz   38;5;16
+.bz2  38;5;16
+.cab  38;5;16  # Win
+.deb  38;5;16
+.dmg  38;5;16  # OSX
+.gem  38;5;16
+.gz   38;5;16
+.iso  38;5;16
+.jar  38;5;16
+.msi  38;5;16  # Win
+.rar  38;5;16
+.rpm  38;5;16
+.tar  38;5;16
+.tbz  38;5;16
+.tbz2 38;5;16
+.tgz  38;5;16
+.tx   38;5;16
+.war  38;5;16
+.xpi  38;5;16
+.xz   38;5;16
+.z    38;5;16
+.Z    38;5;16
+.zip  38;5;16
+
+# Unimportant text files
+.log 38;5;8
+*~ 38;5;8
+*# 38;5;8
+
+# Unimportant non-text files
+.bak  38;5;8
+.BAK  38;5;8
+.old  38;5;8
+.OLD  38;5;8
+.off  38;5;8
+.OFF  38;5;8
+.dist 38;5;8
+.DIST 38;5;8
+.orig 38;5;8
+.ORIG 38;5;8
+.swp  38;5;8
+.swo  38;5;8
+*,v   38;5;8

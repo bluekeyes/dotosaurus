@@ -15,7 +15,7 @@ source ${ZSH}/oh-my-zsh.sh
 source ${DOTOSAURUS}/colors/base16-tomorrow/shell.sh
 
 # Set up base16 colors for ls
-eval "$(dircolors ${DOTOSAURUS}/coreutils/dircolors-solarized/dircolors.ansi-dark)"
+eval "$(dircolors ${DOTOSAURUS}/colors/dark.256.dircolors)"
 
 # Environment Variables
 export EDITOR='vim'
