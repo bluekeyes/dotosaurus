@@ -1,0 +1,14 @@
+#!/bin/bash
+
+CURRENT=`pwd`
+ROOTID=`stat '/' | sed -n 's/.*Inode: \([0-9]\+\).*/\1/p'`
+while [[ ! -x "$CURRENT/gradlew" ]]; do
+    CURRENTID=`stat "$CURRENT" | sed -n 's/.*Inode: \([0-9]\+\).*/\1/p'`
+    if [[ "$CURRENTID" == "$ROOTID" ]]; then
+        echo "Could not findup ./gradlew" 1>&2;
+        exit 1;
+    fi
+    CURRENT="$CURRENT/.."
+done
+
+$CURRENT/gradlew "$@"
