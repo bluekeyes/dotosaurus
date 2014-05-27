@@ -56,7 +56,7 @@ set ignorecase
 set smartcase
 set gdefault
 set hlsearch
-noremap <silent> <C-L> :nohlsearch<CR><C-L>
+noremap <silent> <leader>l :nohlsearch<cr>
 
 " Configure the status line
 set laststatus=2
@@ -153,9 +153,9 @@ nnoremap <tab> %
 vnoremap <tab> %
 
 " Remove all trailing whitespace in a file
-nnoremap <leader>T :%s/\s\+$//<cr>:let @/=''<cr>
+nnoremap <silent> <leader>T :%s/\s\+$//<cr>:let @/=''<cr>
 
-" Enable the soloarized color scheme
+" Enable the base16 color scheme
 set background=dark
 let base16colorspace=256
 colorscheme base16-tomorrow
