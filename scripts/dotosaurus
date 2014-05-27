@@ -5,6 +5,7 @@ import sys
 import glob
 import shutil
 import argparse
+import subprocess
 
 def info(msg):
     print '[ \033[34m..\033[0m ] ' + msg
@@ -12,8 +13,11 @@ def info(msg):
 def success(msg):
     print '[ \033[32mOK\033[0m ] ' + msg
 
-def fail(msg):
+def error(msg):
     print '[ \033[31mFAIL\033[0m ] ' + msg
+
+def die(msg):
+    error(msg)
     sys.exit(1)
 
 def find_sources():
@@ -45,7 +49,7 @@ def install(args):
         name = '.' + os.path.splitext(os.path.basename(source))[0]
         dest = os.path.join(os.path.expanduser('~'), name)
         if not args.conflict and os.path.lexists(dest):
-            fail('{0} exists, run with --force or --backup'.format(dest))
+            die('{} exists, run with --force or --backup'.format(dest))
         else:
             links.append((source, dest))
 
@@ -62,10 +66,66 @@ def install(args):
     create_default_dir(os.path.expanduser('~/.local/share/vim/undo'))
     create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
 
+    if subprocess.call(['git', 'show-ref', '--verify', '--quiet', 'refs/heads/local']):
+        info('creating branch "local"')
+        if subprocess.call(['git', 'checkout', '-b', 'local']):
+            die('failed to create branch "local"')
+        else:
+            success('created branch "local"; commit local changes to this branch')
+    else:
+        info('branch "local" already exists')
+
     success('dotosaurus installed')
 
 def update(args):
-    pass
+    if subprocess.call(['git', 'diff', '--quiet']):
+        die('commit or stash local changes before updating')
+
+    if not args.continue_update:
+        info('fetching remote changes')
+        if subprocess.call(['git', 'fetch', 'origin']):
+            die('failed to fetch changed from origin')
+
+        info('switching to branch "master"')
+        if subprocess.call(['git', 'checkout', 'refs/heads/master']):
+            die('failed to switch to branch "master"')
+
+        info('merging "origin/master" into "master"')
+        if subprocess.call(['git', 'merge', '--ff-only', 'origin/master']):
+            error('failed to fast-forward branch "master"')
+            die('remove or push any local commits and try again')
+        else:
+            success('updated branch "master"')
+
+        info('switching to branch "local"')
+        if subprocess.call(['git', 'checkout', 'refs/heads/local']):
+            die('failed to switch to branch "local"')
+
+        info('rebasing branch "local" on top of "origin/master"')
+        if subprocess.call(['git', 'rebase', '--ignore-date', 'origin/master']):
+            error('failed to rebase branch "local"')
+            die('resolve merge conflicts then run "dotosaurus update --continue"')
+        else:
+            success('updated branch "local"')
+
+    if args.continue_update:
+        info('continuing update')
+        if subprocess.call(['git', 'rebase', '--continue']):
+            die('failed to continue rebase; no update in progress?')
+        else:
+            success('updated branch "local"')
+
+    info('initializing submodules')
+    if subprocess.call(['git', 'submodule', 'init']):
+        die('failed to initialize submodules')
+
+    info('updating submodules')
+    if subprocess.call(['git', 'submodule', 'update']):
+        die('failed to update submodules')
+    else:
+        success('updated submodules')
+
+    sucess('update complete')
 
 def make_arg_parser():
     parser = argparse.ArgumentParser(description='install and update dotosaurus')
@@ -76,19 +136,26 @@ def make_arg_parser():
     install_parser.set_defaults(action=install, conflict=None)
 
     conflict_group = install_parser.add_mutually_exclusive_group()
-    conflict_group.add_argument('-f', '--force',
+    conflict_group.add_argument('--force',
                                 action='store_const', const=remove, dest='conflict',
                                 help='overwrite existing files')
-    conflict_group.add_argument('-b', '--backup',
+    conflict_group.add_argument('--backup',
                                 action='store_const', const=backup, dest='conflict',
                                 help='backup existing files')
 
     # update
     update_parser = subparsers.add_parser('update', description='update dotosaurus')
     update_parser.set_defaults(action=update)
+    update_parser.add_argument('--continue', action='store_true', dest='continue_update',
+                              help='continue update after resolving conflicts')
 
     return parser
 
 if __name__ == '__main__':
+    dotosaurus = os.path.expanduser('~/.dotosaurus')
+    if os.getcwd() != dotosaurus:
+        info('switching to {}'.format(dotosaurus))
+        os.chdir(dotosaurus)
+
     args = make_arg_parser().parse_args()
     args.action(args)
