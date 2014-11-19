@@ -24,3 +24,4 @@
     logp = log -p
     ff = merge --ff-only
     tags = tag -l
+    fop = fetch origin --prune
