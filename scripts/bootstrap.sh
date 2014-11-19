@@ -1,5 +1,5 @@
 #!/bin/sh
-DOTOSAURUS="~/.dotosaurus"
+DOTOSAURUS="${HOME}/.dotosaurus"
 
 fail() {
     echo -e "[ \033[31mFAIL\033[0m ] $1" 1>&2
