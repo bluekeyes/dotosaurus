@@ -186,4 +186,5 @@ nnoremap <C-l> <C-w>l
 autocmd FileType mail,human,gitcommit set formatoptions+=t textwidth=72
 " Makefiles are fantastic...
 autocmd FileType make set noexpandtab shiftwidth=8
-
+" By default, only README.md is a markdown file
+autocmd BufNewFile,BufRead *.md set filetype=markdown
