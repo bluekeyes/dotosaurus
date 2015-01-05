@@ -178,6 +178,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
+" Open splits in more natural positions
+set splitbelow
+set splitright
+
 "----------------------------------
 " File-type Specific Options
 "----------------------------------
