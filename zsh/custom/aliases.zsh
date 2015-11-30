@@ -8,3 +8,4 @@ unalias cd/
 # Additional aliases --------------------------------------------------
 alias less="less -S"
 alias gradled="gradlef --daemon"
+alias servedir="python -m SimpleHTTPServer"
