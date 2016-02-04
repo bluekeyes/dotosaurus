@@ -20,7 +20,7 @@
     df = diff
     dfc = diff --cached
     amend = commit --amend
-    logn = log --name-only
+    logn = log --name-status
     logp = log -p
     ff = merge --ff-only
     tags = tag -l
