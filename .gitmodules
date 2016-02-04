@@ -36,3 +36,23 @@
 [submodule "nvm"]
 	path = nvm
 	url = https://github.com/creationix/nvm.git
+[submodule "vim/vim.ln/bundle/vim-jade"]
+	path = vim/vim.ln/bundle/vim-jade
+	url = https://github.com/digitaltoad/vim-jade.git
+	ignore = untracked
+[submodule "vim/vim.ln/bundle/vim-stylus"]
+	path = vim/vim.ln/bundle/vim-stylus
+	url = https://github.com/wavded/vim-stylus.git
+	ignore = untracked
+[submodule "vim/vim.ln/bundle/typescript-vim"]
+	path = vim/vim.ln/bundle/typescript-vim
+	url = https://github.com/leafgarland/typescript-vim.git
+	ignore = untracked
+[submodule "vim/vim.ln/bundle/css.vim"]
+	path = vim/vim.ln/bundle/css.vim
+	url = https://github.com/JulesWang/css.vim.git
+	ignore = untracked
+[submodule "vim/vim.ln/bundle/vim-less"]
+	path = vim/vim.ln/bundle/vim-less
+	url = https://github.com/genoma/vim-less.git
+	ignore = untracked
