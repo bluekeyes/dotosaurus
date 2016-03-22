@@ -192,3 +192,5 @@ autocmd FileType mail,human,gitcommit set formatoptions+=t textwidth=72
 autocmd FileType make set noexpandtab shiftwidth=8
 " By default, only README.md is a markdown file
 autocmd BufNewFile,BufRead *.md set filetype=markdown
+" 2-space tabs in JS seems to be the standard
+autocmd FileType javascript,json set shiftwidth=2 softtabstop=2 tabstop=2
