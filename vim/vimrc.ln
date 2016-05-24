@@ -194,3 +194,5 @@ autocmd FileType make set noexpandtab shiftwidth=8
 autocmd BufNewFile,BufRead *.md set filetype=markdown
 " 2-space tabs in JS seems to be the standard
 autocmd FileType javascript,json set shiftwidth=2 softtabstop=2 tabstop=2
+" Turn on spell checking for git commits
+autocmd FileType gitcommit set spell
