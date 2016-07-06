@@ -30,7 +30,7 @@ function prompt_char() {
 }
 
 PROMPT='
-${bg_base16[01]}${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)%E
+${bg_base16[01]}${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)%E
 %{$reset_color%}$(prompt_char) '
 
 RPROMPT='$fg_base16[03]%*%{$reset_color%}'

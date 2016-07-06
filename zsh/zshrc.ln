@@ -4,7 +4,7 @@ export ZSH=${DOTOSAURUS}/zsh/oh-my-zsh
 export ZSH_CUSTOM=${DOTOSAURUS}/zsh/custom
 export DISABLE_AUTO_UPDATE="true"
 
-plugins=(base16)
+plugins=(base16 virtualenv)
 
 export ZSH_BASE16_COLORSPACE="256"
 export ZSH_THEME="wavelength-base16"
