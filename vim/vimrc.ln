@@ -7,16 +7,32 @@
 
 " Remove all autcmds - duplicates are bad!
 autocmd!
-" vi compatibility is for old people
+
+" Disable vi compatibilit, I don't need it
 set nocompatible
 
-" Load pathogen and plugins
-runtime bundle/pathogen/autoload/pathogen.vim
-execute pathogen#infect()
+" Load plugins
+call plug#begin('~/.vim/plugins')
 
-" Yay for syntax highlighting and sensible filetype handling
-syntax on
+" -- functional plugins
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+
+" -- language/syntax plugins
+Plug 'JulesWang/css.vim'
+Plug 'digitaltoad/vim-jade'
+Plug 'genoma/vim-less'
+Plug 'leafgarland/typescript-vim'
+Plug 'tfnico/vim-gradle'
+Plug 'tpope/vim-git'
+Plug 'wavded/vim-stylus'
+
+call plug#end()
+
+" Enable syntax highlighting, filtetypes from plugins
 filetype plugin indent on
+syntax on
 
 " I don't use modelines and apparently there are security problems
 set modelines=0

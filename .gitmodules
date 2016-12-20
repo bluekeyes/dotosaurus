@@ -1,58 +1,6 @@
-[submodule "vim/vim.ln/bundle/pathogen"]
-	path = vim/vim.ln/bundle/pathogen
-	url = git://github.com/tpope/vim-pathogen.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-git"]
-	path = vim/vim.ln/bundle/vim-git
-	url = git://github.com/tpope/vim-git.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-repeat"]
-	path = vim/vim.ln/bundle/vim-repeat
-	url = git://github.com/tpope/vim-repeat.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-surround"]
-	path = vim/vim.ln/bundle/vim-surround
-	url = git://github.com/tpope/vim-surround.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-abolish"]
-	path = vim/vim.ln/bundle/vim-abolish
-	url = git://github.com/tpope/vim-abolish.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/snipmate.vim"]
-	path = vim/vim.ln/bundle/snipmate.vim
-	url = git://github.com/msanders/snipmate.vim.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-gradle"]
-	path = vim/vim.ln/bundle/vim-gradle
-	url = https://github.com/tfnico/vim-gradle.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-commentary"]
-	path = vim/vim.ln/bundle/vim-commentary
-	url = https://github.com/tpope/vim-commentary.git
-	ignore = untracked
 [submodule "zsh/oh-my-zsh"]
 	path = zsh/oh-my-zsh
 	url = git://github.com/robbyrussell/oh-my-zsh.git
 [submodule "nvm"]
 	path = nvm
 	url = https://github.com/creationix/nvm.git
-[submodule "vim/vim.ln/bundle/vim-jade"]
-	path = vim/vim.ln/bundle/vim-jade
-	url = https://github.com/digitaltoad/vim-jade.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-stylus"]
-	path = vim/vim.ln/bundle/vim-stylus
-	url = https://github.com/wavded/vim-stylus.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/typescript-vim"]
-	path = vim/vim.ln/bundle/typescript-vim
-	url = https://github.com/leafgarland/typescript-vim.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/css.vim"]
-	path = vim/vim.ln/bundle/css.vim
-	url = https://github.com/JulesWang/css.vim.git
-	ignore = untracked
-[submodule "vim/vim.ln/bundle/vim-less"]
-	path = vim/vim.ln/bundle/vim-less
-	url = https://github.com/genoma/vim-less.git
-	ignore = untracked
