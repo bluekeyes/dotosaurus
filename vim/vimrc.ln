@@ -21,9 +21,11 @@ Plug 'tpope/vim-surround'
 
 " -- language/syntax plugins
 Plug 'JulesWang/css.vim'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade'
 Plug 'genoma/vim-less'
 Plug 'leafgarland/typescript-vim'
+Plug 'pangloss/vim-javascript'
 Plug 'tfnico/vim-gradle'
 Plug 'tpope/vim-git'
 Plug 'wavded/vim-stylus'
