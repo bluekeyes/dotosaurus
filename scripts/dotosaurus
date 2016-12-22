@@ -45,6 +45,13 @@ def has_branch(branch):
     cmd = ['git', 'show-ref', '--verify', '--quiet', 'refs/heads/{}'.format(branch)]
     return not subprocess.call(cmd)
 
+def install_vim_plugins():
+    info('installing vim plugins')
+    if subprocess.call(['vim', '+PlugInstall', '+qall']):
+        error('failed to install Vim plugins; try running PlugInstall manually')
+    else:
+        success('installed vim plugins')
+
 def install(args):
     info('installing dotosaurus')
 
@@ -69,6 +76,8 @@ def install(args):
     create_default_dir(os.path.expanduser('~/.local/share/vim/swap'))
     create_default_dir(os.path.expanduser('~/.local/share/vim/undo'))
     create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
+
+    install_vim_plugins()
 
     if not has_branch('local'):
         info('creating branch "local"')
@@ -132,6 +141,8 @@ def update(args):
         die('failed to update submodules')
     else:
         success('updated submodules')
+
+    install_vim_plugins()
 
     success('update complete')
 
