@@ -1,0 +1,5 @@
+export DOTOSAURUS=~/.dotosaurus
+
+# configure zplug
+export ZPLUG_HOME=~/.zplug
+export ZPLUG_LOADFILE=${DOTOSAURUS}/zsh/zplug.zsh

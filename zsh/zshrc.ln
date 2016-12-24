@@ -1,39 +1,26 @@
-export DOTOSAURUS=~/.dotosaurus
-
-export ZSH=${DOTOSAURUS}/zsh/oh-my-zsh
-export ZSH_CUSTOM=${DOTOSAURUS}/zsh/custom
-export DISABLE_AUTO_UPDATE="true"
-
-plugins=(base16 virtualenv)
-
+# configre plugin options
 export ZSH_BASE16_COLORSPACE="256"
-export ZSH_THEME="wavelength-base16"
+export NVM_LAZY_LOAD=true
 
-source ${ZSH}/oh-my-zsh.sh
+# enable zplug
+source ${DOTOSAURUS}/zsh/zplug/init.zsh
 
-# Install base16 colors into the 256 colorspace
-source ${DOTOSAURUS}/colors/base16-tomorrow/shell.sh
-
-# Set up base16 colors for ls
-eval "$(dircolors ${DOTOSAURUS}/colors/dark.256.dircolors)"
-
-# Environment Variables
+# interactive environment variables
+# =================================
 export EDITOR='vim'
+export PAGER="less"
+export LESS="-R"
+
+export LC_CTYPE=$LANG
 
 # PATH changes
+# ============
 export PATH="${DOTOSAURUS}/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
-# Setup nvm
-export NVM_DIR="${HOME}/.nvm"
-source ${DOTOSAURUS}/nvm/nvm.sh
-nvm use stable &> /dev/null
+# load and enable all plugins
+zplug load
 
-# ---------------------------------------------------------------------
-# Aliases in $ZSH_CUSTOM/aliases.zsh
-# ---------------------------------------------------------------------
-
-# Include local settings
-if [ -f ~/.zshrc.local ]; then
-    source ~/.zshrc.local
-fi
+# enable job control again
+# see https://github.com/zplug/zplug/issues/322
+setopt monitor
