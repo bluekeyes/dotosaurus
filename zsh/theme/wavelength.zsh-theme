@@ -101,7 +101,7 @@ function wavelength_statusline() {
   local LEFT="${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)"
   local RIGHT=""
   if [[ -n ${SSH_CONNECTION} ]]; then
-    RIGHT='$fg_base16[0D]%m$fg_base16[03]'
+    RIGHT="${fg_base16[0D]}%m${fg_base16[03]}"
   fi
 
   local lwidth=$(visible_width "$LEFT")
