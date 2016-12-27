@@ -75,7 +75,7 @@ function parse_git_dirty() {
 #
 # Gets the current virtual environment
 #
-function virtualenv_prompt_info(){
+function virtualenv_prompt_info() {
   if [[ -n $VIRTUAL_ENV ]]; then
     printf "%s[%s] " "%{${fg[yellow]}%}" ${${VIRTUAL_ENV}:t}
   fi
@@ -84,11 +84,33 @@ function virtualenv_prompt_info(){
 # Disable virtualenv prompt mangling
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-PROMPT='
-${bg_base16[01]}${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)%E
-%{$reset_color%}$(prompt_char) '
 
-RPROMPT='$fg_base16[03]%*%{$reset_color%}'
-if [[ -n ${SSH_CONNECTION} ]]; then
-    RPROMPT='$fg_base16[0D]%n@%m$fg_base16[03]|'${RPROMPT}
-fi
+#
+# Gets the number of visible characters in a prompt string
+# http://stackoverflow.com/questions/10564314/count-length-of-user-visible-string-for-zsh-prompt
+#
+function visible_width() {
+  local zero='%([BSUbfksu]|([FK]|){*})'
+  echo ${#${(S%%)1//$~zero/}}
+}
+
+#
+# Gets the text for the main prompt line
+#
+function wavelength_statusline() {
+  local LEFT="${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)"
+  local RIGHT=""
+  if [[ -n ${SSH_CONNECTION} ]]; then
+    RIGHT='$fg_base16[0D]%m$fg_base16[03]'
+  fi
+
+  local lwidth=$(visible_width "$LEFT")
+  local rwidth=$(visible_width "$RIGHT")
+  local padding=$(( $COLUMNS - $lwidth + (${#RIGHT} - $rwidth) ))
+
+  echo $LEFT${(l:$padding:)RIGHT}
+}
+
+PROMPT='
+${bg_base16[01]}$(wavelength_statusline)
+%{$reset_color%}$(prompt_char) '
