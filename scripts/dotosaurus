@@ -52,19 +52,6 @@ def install_vim_plugins():
     else:
         success('installed vim plugins')
 
-def call_zplug(cmd):
-    return subprocess.call([
-        'zsh', '-c', 'source ./zsh/zplug/init.zsh && zplug {}'.format(cmd)
-    ])
-
-def install_zsh_plugins():
-    if call_zplug('check'):
-        info('installing zsh plugins')
-        if call_zplug('install'):
-            die('failed to install zsh plugins; try manual installation')
-        else:
-            success('installed zsh plugins')
-
 def install(args):
     info('installing dotosaurus')
 
@@ -91,7 +78,6 @@ def install(args):
     create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
 
     install_vim_plugins()
-    install_zsh_plugins()
 
     if not has_branch('local'):
         info('creating branch "local"')
@@ -156,16 +142,7 @@ def update(args):
     else:
         success('updated submodules')
 
-    info('clearing zplug and completion caches')
-    remove(os.path.expanduser('~/.zcompdump'))
-    remove(os.path.expanduser('~/.zplug/zcompdump'))
-    if call_zplug('clear'):
-        die('failed to clear zplug cache')
-    else:
-        success('cleared zplug cache')
-
     install_vim_plugins()
-    install_zsh_plugins()
 
     success('update complete')
 

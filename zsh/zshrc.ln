@@ -18,6 +18,11 @@ export LC_CTYPE=$LANG
 export PATH="${DOTOSAURUS}/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
+# install plugins if needed
+if ! zplug check; then
+    zplug install
+fi
+
 # load and enable all plugins
 zplug load
 
