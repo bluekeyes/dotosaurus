@@ -206,12 +206,16 @@ set splitright
 "----------------------------------
 
 " Wrap human-readable text files at 72 characters
-autocmd FileType mail,human,gitcommit set formatoptions+=t textwidth=72
+autocmd FileType mail,human,gitcommit setlocal formatoptions+=t textwidth=72
+
 " Makefiles are fantastic...
-autocmd FileType make set noexpandtab shiftwidth=8
+autocmd FileType make setlocal noexpandtab shiftwidth=8
+
 " By default, only README.md is a markdown file
-autocmd BufNewFile,BufRead *.md set filetype=markdown
-" 2-space tabs in JS seems to be the standard
-autocmd FileType javascript,json set shiftwidth=2 softtabstop=2 tabstop=2
+autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
+
 " Turn on spell checking for git commits
-autocmd FileType gitcommit set spell
+autocmd FileType gitcommit setlocal spell
+
+" 2-space tabs in JS, CSS, HTML seems to be the standard
+autocmd FileType javascript,json,css,scss,html setlocal shiftwidth=2 softtabstop=2 tabstop=2
