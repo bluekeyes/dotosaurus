@@ -1,5 +1,6 @@
-# install and manage NVM
 zplug "lukechilds/zsh-nvm"
+zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
+zplug "monochromegane/the_platinum_searcher", from:gh-r, as:command, rename-to:pt
 
 # load custon configuration
 zplug "${DOTOSAURUS}/zsh/plugins", from:local, as:plugin
