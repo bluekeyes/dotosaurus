@@ -9,4 +9,4 @@ zplug "${DOTOSAURUS}/zsh/plugins", from:local, as:plugin
 zplug "${DOTOSAURUS}/zsh/theme", from:local, as:theme
 
 # load local overrides
-zplug "${HOME}/.zshrc.local", from:local, as:plugin, if:"[[ -f ${HOME}/.zshrc.local ]]"
+zplug "${HOME}", from:local, as:plugin, use:'.zshrc.local', if:"[[ -f ${HOME}/.zshrc.local ]]"
