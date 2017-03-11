@@ -77,12 +77,26 @@ function parse_git_dirty() {
 #
 function virtualenv_prompt_info() {
   if [[ -n $VIRTUAL_ENV ]]; then
-    printf "%s[%s] " "%{${fg[yellow]}%}" ${${VIRTUAL_ENV}:t}
+    printf "%s[%s]" "%{${fg_base16[0A]}%}" ${${VIRTUAL_ENV}:t}
   fi
 }
 
 # Disable virtualenv prompt mangling
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+
+
+#
+# Gets the current archmage environment
+#
+function mage_prompt_info() {
+  local MAGE_PROMPT=''
+  if command -v mage > /dev/null; then
+    MAGE_PROMPT=$(mage prompt)
+    if [[ -n $MAGE_PROMPT ]]; then
+      printf "%s[%s]" "%{${fg_base16[0B]}%}" ${MAGE_PROMPT}
+    fi
+  fi
+}
 
 
 #
@@ -98,7 +112,7 @@ function visible_width() {
 # Gets the text for the main prompt line
 #
 function wavelength_statusline() {
-  local LEFT="${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)"
+  local LEFT="${fg_base16[0A]}λ ${fg_base16[03]}$(highlighted_pwd)${fg_base16[03]} $(git_prompt_info)$(virtualenv_prompt_info)$(mage_prompt_info)"
   local RIGHT=""
   if [[ -n ${SSH_CONNECTION} ]]; then
     RIGHT="${fg_base16[0D]}%m${fg_base16[03]}"
