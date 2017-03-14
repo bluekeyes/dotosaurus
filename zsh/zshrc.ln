@@ -25,7 +25,3 @@ fi
 
 # load and enable all plugins
 zplug load
-
-# enable job control again
-# see https://github.com/zplug/zplug/issues/322
-setopt monitor
