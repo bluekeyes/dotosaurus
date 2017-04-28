@@ -20,6 +20,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " -- language/syntax plugins
+Plug 'elmcast/elm-vim'
 Plug 'JulesWang/css.vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade'
@@ -32,6 +33,9 @@ Plug 'tpope/vim-git'
 Plug 'wavded/vim-stylus'
 
 call plug#end()
+
+" Configure plugins
+let g:elm_setup_keybindings = 0
 
 " Enable syntax highlighting, filtetypes from plugins
 filetype plugin indent on
