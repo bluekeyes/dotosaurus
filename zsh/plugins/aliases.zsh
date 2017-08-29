@@ -16,3 +16,6 @@ alias grep="grep --color=auto --exclude-dir={.bzr,CVS,.git,.hg,.svn}"
 # other
 alias less="less -S"
 alias gradled="gradlef --daemon"
+
+# add github actions to 'git'
+alias git="hub"
