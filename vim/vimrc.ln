@@ -201,6 +201,19 @@ set comments+=fb:*
 nnoremap <leader>w <C-w>s<C-w>l:bn<cr>
 nnoremap <leader>v <C-w>v<C-w>l:bn<cr>
 
+" https://stackoverflow.com/questions/7135985/detecting-split-window-dimensions
+command! SplitWindow call s:SplitWindow()
+function! s:SplitWindow()
+  let l:height=winheight(0) * 2
+  let l:width=winwidth(0)
+  if (l:height > l:width)
+     :split
+  else
+     :vsplit
+  endif
+endfunction
+noremap <silent> <leader>W :SplitWindow<cr>l:bn<cr>
+
 " Make navigating between splits require fewer keystrokes
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
