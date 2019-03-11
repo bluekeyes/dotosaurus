@@ -38,6 +38,7 @@ call plug#end()
 
 " Configure plugins
 let g:elm_setup_keybindings = 0
+let g:markdown_minlines = 100
 
 " Enable syntax highlighting, filtetypes from plugins
 filetype plugin indent on
