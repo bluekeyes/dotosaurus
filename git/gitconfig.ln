@@ -4,7 +4,7 @@
 
 [core]
     editor = "vim"
-	pager = less -x1,5
+    pager = less -x1,5
 
 [color]
     ui = auto
@@ -12,6 +12,9 @@
     diff = auto
     interactive = auto
     status = auto
+    
+[pager]
+    branch = false
 
 [alias]
     st = status -uall
