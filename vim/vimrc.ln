@@ -226,8 +226,8 @@ set splitbelow
 set splitright
 
 " Add shortcuts for change shiftwidth
-nnoremap <leader>s2 :set shiftwidth=2<CR>
-nnoremap <leader>s4 :set shiftwidth=4<CR>
+nnoremap <leader>s2 :setlocal shiftwidth=2<CR>
+nnoremap <leader>s4 :setlocal shiftwidth=4<CR>
 
 "----------------------------------
 " File-type Specific Options
