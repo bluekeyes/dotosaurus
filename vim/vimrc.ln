@@ -18,6 +18,7 @@ call plug#begin('~/.vim/plugins')
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'SirVer/ultisnips'
 
 " -- language/syntax plugins
 Plug 'elmcast/elm-vim'
@@ -39,6 +40,11 @@ call plug#end()
 " Configure plugins
 let g:elm_setup_keybindings = 0
 let g:markdown_minlines = 100
+
+" Configure snippets
+" Use a fixed directory for speed + so I'm not surprised by random plugin snippets
+let g:UltiSnipsSnippetDirectories=[$HOME.'/.vim/snips']
+let g:UltiSnipsEditSplit="context"
 
 " Enable syntax highlighting, filtetypes from plugins
 filetype plugin indent on

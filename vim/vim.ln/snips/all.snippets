@@ -1,0 +1,3 @@
+snippet gitsha "A random 40 character SHA1 value" i
+`!p snip.rv = bytes((random.getrandbits(8) for i in range(20))).hex() if not snip.c else snip.c`
+endsnippet
