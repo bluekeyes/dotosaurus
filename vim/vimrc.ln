@@ -8,7 +8,7 @@
 " Remove all autcmds - duplicates are bad!
 autocmd!
 
-" Disable vi compatibilit, I don't need it
+" Disable vi compatibility, I don't need it
 set nocompatible
 
 " Load plugins
@@ -59,7 +59,7 @@ set noerrorbells
 set backspace=indent,eol,start
 set complete-=i
 
-" Visually wrap long lines at break boundaries....
+" Visually wrap long lines at break boundaries
 set wrap
 set linebreak
 
@@ -67,7 +67,7 @@ set linebreak
 set showmatch
 set matchtime=3
 
-" Indentation settings, tabs suck!
+" Indentation settings, prefer spaces
 set autoindent
 set smarttab
 set expandtab
@@ -105,14 +105,7 @@ set number
 
 " If relative number are supported, add a function to toggle them
 if exists('+relativenumber')
-    function! NumberModeToggle()
-        if &l:number ==# 'nonumber'
-            setlocal number
-        else
-            setlocal relativenumber
-        endif
-    endfunction
-    nnoremap <silent> <leader>n :call NumberModeToggle()<cr>
+    nnoremap <silent> <leader>n :setlocal relativenumber!<CR>
 else
     nnoremap <silent> <leader>n <nop>
 endif
