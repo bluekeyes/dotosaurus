@@ -14,3 +14,11 @@ func Test${1:Function}(t *testing.T) {
 	}
 }
 endsnippet
+
+snippet todo "A TODO comment"
+// TODO(`!v $USER`): $0
+endsnippet
+
+snippet unimpl "An unimplemented statement"
+panic("TODO(`!v $USER`): unimplemented")
+endsnippet
