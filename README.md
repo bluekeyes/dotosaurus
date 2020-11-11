@@ -41,7 +41,7 @@ To install dotosaurus, run
 
     ./scripts/dotosaurus install
 
-Note that this requires Python 2.7.x. You don't need to run this script if you
+Note that this requires Python 3. You don't need to run this script if you
 already ran the bootstrap script.
 
 If any dotfiles already exist, the command will fail. If this happens, rerun
@@ -55,7 +55,7 @@ To update dotosaurus, run
 
     ./scripts/dotosaurus update
 
-Note that this require Python 2.7.x.
+Note that this requires Python 3.
 
 If you have local changes that conflict with new remote changes, the command
 will fail and ask you to resolve merge conflicts manually. Once the conflicts
