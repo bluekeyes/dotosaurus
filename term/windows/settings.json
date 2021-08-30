@@ -1,0 +1,65 @@
+{
+    "$schema": "https://aka.ms/terminal-profiles-schema",
+    "defaultProfile": "",
+    "copyOnSelect": false,
+    "copyFormatting": false,
+    "profiles": {
+        "defaults": {
+            "fontSize": 10,
+            "cursorShape": "filledBox",
+            "colorScheme": "base16-tomorrow"
+        },
+        "list": [
+            {
+                "name": "Windows PowerShell",
+                "commandline": "powershell.exe",
+                "hidden": false
+            },
+            {
+                "name": "Command Prompt",
+                "commandline": "cmd.exe",
+                "hidden": false
+            },
+            {
+                "hidden": false,
+                "name": "Ubuntu",
+                "source": "Windows.Terminal.Wsl",
+                "startingDirectory": "\\\\wsl$\\Ubuntu\\home\\bkeyes"
+            },
+            {
+                "hidden": false,
+                "name": "Azure Cloud Shell",
+                "source": "Windows.Terminal.Azure"
+            }
+        ]
+    },
+    "schemes": [
+        {
+            "name": "base16-tomorrow",
+            "cursorColor": "#c5c8c6",
+            "selectionBackground": "#c5c8c6",
+            "background" : "#1d1f21",
+            "foreground" : "#c5c8c6",
+            "black" : "#121f21",
+            "red" : "#cc6666",
+            "green" : "#b5bd68",
+            "yellow" : "#f0c674",
+            "blue" : "#81a2be",
+            "purple" : "#b294bb",
+            "cyan" : "#8abeb7",
+            "white" : "#c5c8c6",
+            "brightBlack" : "#969896",
+            "brightRed" : "#cc6666",
+            "brightGreen" : "#b5bd68",
+            "brightYellow" : "#f0c674",
+            "brightBlue" : "#81a2be",
+            "brightPurple" : "#b294bb",
+            "brightCyan" : "#8abeb7",
+            "brightWhite" : "#ffffff"
+        }
+    ],
+    "actions": [
+        { "command": "find", "keys": "ctrl+shift+f" },
+        { "command": { "action": "splitPane", "split": "auto", "splitMode": "duplicate" }, "keys": "alt+shift+d" }
+    ]
+}
