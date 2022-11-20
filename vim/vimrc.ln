@@ -249,4 +249,7 @@ autocmd BufNewFile,BufRead *.md setlocal filetype=markdown
 autocmd FileType gitcommit setlocal spell
 
 " 2-space tabs in JS, CSS, HTML seems to be the standard
-autocmd FileType javascript,json,css,scss,html setlocal shiftwidth=2 softtabstop=2 tabstop=2
+autocmd FileType javascript,json,css,scss,html,gohtmltmpl setlocal shiftwidth=2 softtabstop=2 tabstop=2
+
+" Disable 'smart' indentation for HTML files, I find this annoying
+autocmd FileType html,gohtmltmpl setlocal indentexpr=
