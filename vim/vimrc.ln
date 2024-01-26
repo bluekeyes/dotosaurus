@@ -257,3 +257,6 @@ autocmd FileType javascript,json,css,scss,html,gohtmltmpl setlocal shiftwidth=2 
 
 " Disable 'smart' indentation for HTML files, I find this annoying
 autocmd FileType html,gohtmltmpl setlocal indentexpr=
+
+" Goland/IntelliJ uses .gohtml for Go+HTML template syntax highlighting, instead of .html.tmpl
+autocmd BufNewFile,BufRead *.gohtml setlocal filetype=gohtmltmpl
