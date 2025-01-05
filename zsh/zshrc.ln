@@ -2,12 +2,6 @@
 export ZSH_BASE16_COLORSPACE="256"
 export NVM_LAZY_LOAD=true
 
-# enable nvm
-source ${DOTOSAURUS}/zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
-
-# enable zplug
-source ${DOTOSAURUS}/zsh/zplug/init.zsh
-
 # interactive environment variables
 # =================================
 export EDITOR='vim'
@@ -21,10 +15,48 @@ export LC_CTYPE=$LANG
 export PATH="${DOTOSAURUS}/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
-# install plugins if needed
-if ! zplug check; then
-    zplug install
-fi
+# zsh modules (copied from zplug)
+# ===============================
+autoload -Uz regexp-replace
+autoload -Uz add-zsh-hook
+autoload -Uz colors
+autoload -Uz compinit
 
-# load and enable all plugins
-zplug load
+colors
+
+zmodload zsh/system
+zmodload zsh/datetime
+zmodload zsh/parameter
+
+# plugins
+# =======
+() {
+    local plugins=(
+        "zsh-nvm/zsh-nvm.plugin.zsh"
+        "aliases.zsh"
+        "base16.zsh"
+        "colors.zsh"
+        "completion.zsh"
+        "functions.zsh"
+        "history.zsh"
+        "keys.zsh"
+        "options.zsh"
+        "title.zsh"
+        "urls.zsh"
+    )
+
+    for plugin in ${plugins}; do
+        source ${DOTOSAURUS}/zsh/plugins/${plugin}
+    done
+}
+
+# theme
+# =====
+setopt prompt_subst
+source ${DOTOSAURUS}/zsh/theme/wavelength.zsh-theme
+
+# local customizations
+# ====================
+if [[ -f "${HOME}/.zshrc.local" ]]; then
+    source "${HOME}/.zshrc.local"
+fi
