@@ -1,5 +1,3 @@
-zplug "lukechilds/zsh-nvm"
-
 # load commands
 zplug "stedolan/jq", from:gh-r, as:command, rename-to:jq
 zplug "BurntSushi/ripgrep", from:gh-r, as:command, rename-to:rg

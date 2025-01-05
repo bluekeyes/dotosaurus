@@ -2,6 +2,9 @@
 export ZSH_BASE16_COLORSPACE="256"
 export NVM_LAZY_LOAD=true
 
+# enable nvm
+source ${DOTOSAURUS}/zsh/plugins/zsh-nvm/zsh-nvm.plugin.zsh
+
 # enable zplug
 source ${DOTOSAURUS}/zsh/zplug/init.zsh
 
