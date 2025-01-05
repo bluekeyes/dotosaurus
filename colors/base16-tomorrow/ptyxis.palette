@@ -1,0 +1,27 @@
+[Palette]
+Name=Base16 Tomorrow
+Primary=true
+UseSystemAccent=true
+
+[Dark]
+Foreground=#c5c8c6
+Background=#1d1f21
+TitlebarForeground=#c5c8c6
+TitlebarBackground=#1d1f21
+Cursor=#c5c8c6
+Color0=#1d1f21
+Color1=#cc6666
+Color2=#b5bd68
+Color3=#f0c674
+Color4=#81a2be
+Color5=#b294bb
+Color6=#8abeb7
+Color7=#c5c8c6
+Color8=#969896
+Color9=#cc6666
+Color10=#b5bd68
+Color11=#f0c674
+Color12=#81a2be
+Color13=#b294bb
+Color14=#8abeb7
+Color15=#ffffff
