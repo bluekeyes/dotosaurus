@@ -1,0 +1,13 @@
+snippet tfvar "Terraform variable definition" b
+variable "${1:name}" {
+  type        = ${2:string}
+  description = "${3:description}"
+  default     = ${4:"default"}
+}
+endsnippet
+
+snippet tfout "Terraform output definition" b
+output "${1:name}" {
+  value = $2
+}
+endsnippet
