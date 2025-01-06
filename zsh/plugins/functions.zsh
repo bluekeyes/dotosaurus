@@ -1,8 +1,9 @@
-gofiles() {
-    go list -f '{{range .GoFiles}}{{ printf "%s/%s\n" $.Dir .}}{{end}}' ./...
-    go list -f '{{range .TestGoFiles}}{{ printf "%s/%s\n" $.Dir .}}{{end}}' ./...
-}
+() {
+    local funcs="${DOTOSAURUS}/zsh/functions"
 
-autoload zmv
-alias zmv='noglob zmv'
-alias zcp='noglob zmv -C'
+    export FPATH="${funcs}:${FPATH}"
+
+    if [[ -d "${funcs}" ]]; then
+        autoload ${=$(cd ${funcs} && echo *)}
+    fi
+}

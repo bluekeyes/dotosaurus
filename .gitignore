@@ -4,3 +4,6 @@ vim/**/doc/
 
 # Managed by vim-plug
 vim/vim.ln/plugins/
+
+# Managed by installation/update scripts
+bin/

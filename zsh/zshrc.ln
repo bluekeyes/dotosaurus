@@ -43,6 +43,7 @@ zmodload zsh/parameter
         "options.zsh"
         "title.zsh"
         "urls.zsh"
+        "zmv.zsh"
     )
 
     for plugin in ${plugins}; do
