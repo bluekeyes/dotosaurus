@@ -1,11 +1,19 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-import glob
-import shutil
 import argparse
+import configparser
+import glob
+import json
+import os
+import platform
+import shutil
 import subprocess
+import sys
+import tarfile
+import tempfile
+import urllib.error
+import urllib.request
+
 
 def info(msg):
     print('[ \033[34m..\033[0m ] ' + msg)
@@ -20,8 +28,10 @@ def die(msg):
     error(msg)
     sys.exit(1)
 
+
 def find_sources():
     return list(map(os.path.abspath, glob.glob('*.ln') + glob.glob('*/*.ln')))
+
 
 def remove(path):
     if os.path.islink(path) or os.path.isfile(path):
@@ -30,9 +40,16 @@ def remove(path):
         shutil.rmtree(path)
     success('removed {0}'.format(path))
 
+
 def backup(path):
     os.rename(path, path + '.bak')
     success('moved {0} to {0}.bak'.format(path))
+
+
+def toolexists(name):
+    path = os.path.join('bin', name)
+    return os.path.isfile(path) and os.access(path, os.X_OK)
+
 
 def create_default_dir(path):
     if not os.path.isdir(path):
@@ -41,9 +58,11 @@ def create_default_dir(path):
     else:
         info('skipped {0}, it already exists'.format(path))
 
+
 def has_branch(branch):
     cmd = ['git', 'show-ref', '--verify', '--quiet', 'refs/heads/{}'.format(branch)]
     return not subprocess.call(cmd)
+
 
 def install_vim_plugins():
     info('installing vim plugins')
@@ -52,7 +71,120 @@ def install_vim_plugins():
     else:
         success('installed vim plugins')
 
-def install(args):
+
+def install_tools(force=False):
+    # TODO: fix duplication of the literal 'bin' directory
+    # TODO: consider moving this out of the '~/.dotosaurus' directory
+    create_default_dir('bin')
+
+    tools = configparser.ConfigParser()
+    tools.read('tools.config')
+
+    for tool in tools.sections():
+        if not force and toolexists(tool):
+            info('tool "{0}" exists, skipping install'.format(tool))
+            continue
+
+        srctype = tools[tool].get('type', '')
+        if srctype == 'github-release':
+            install_github_release_tool(tool, tools[tool]['source'])
+        else:
+            error('unknown source type "{0}" for tool "{1}", skipping install'.format(srctype, tool))
+
+
+def install_github_release_tool(tool, repo):
+    info('installing {0} from github.com/{1}'.format(tool, repo))
+
+    latest_url = 'https://api.github.com/repos/{0}/releases/latest'.format(repo)
+    try:
+        with urllib.request.urlopen(latest_url) as res:
+            release = json.load(res)
+    except urllib.error.URLError as e:
+        error('failed to identify latest release for {0}: {1}'.format(tool, e))
+        return
+
+    version = release['tag_name']
+    info('latest tag of {0} is {1}'.format(tool, version))
+
+    asset = find_platform_asset(release['assets'])
+    if asset is None:
+        info('no matching asset for {0}, skipping'.format(tool))
+        return
+
+    name = asset['name']
+    info('downloading asset {0}'.format(name))
+
+    tool_path = os.path.join('bin', tool)
+
+    with tempfile.TemporaryDirectory(prefix=tool) as tmp:
+        download_path = download_and_extract_asset(asset, tmp)
+        if download_path:
+            shutil.move(download_path, tool_path)
+            os.chmod(tool_path, 0o755)
+
+            success('installed {0} ({1}) to {2}'.format(tool, version, tool_path))
+
+
+def download_and_extract_asset(asset, workdir):
+    name = asset['name']
+    download_path = os.path.join(workdir, name)
+    download_url = asset['browser_download_url']
+
+    try:
+        with urllib.request.urlopen(download_url) as res, open(download_path, 'wb') as f:
+            shutil.copyfileobj(res, f)
+    except urllib.error.URLError as e:
+        error('failed to download {0}: {1}'.format(name, e))
+        return None
+
+    if name.endswith('.zip'):
+        # TODO: support zip archives
+        error('zip archives are not supported yet')
+        return None
+
+    elif name.endswith('.tar.gz') or name.endswith('.tgz'):
+        with tarfile.open(download_path, 'r') as f:
+            # TODO: don't assume the file has a proper mode in the archive
+            # zplug extracted the archive, used 'file' on each item, then removed all other files
+            exec_member = next(m for m in f.getmembers() if m.isfile() and m.mode&0o100 > 0)
+            f.extractall(workdir, members=[exec_member])
+            return os.path.join(workdir, exec_member.name)
+
+    return download_path
+
+
+def find_platform_asset(assets):
+    extensions = ['', '.zip', '.tar.gz', '.tgz']
+    queries = []
+
+    osname = platform.system().lower()
+    if osname == 'linux':
+        queries.append(['linux'])
+    elif osname == 'darwin':
+        queries.append(['darwin', 'macos'])
+    else:
+        error('unsupport OS: {0}'.format(osname))
+        return None
+
+    # NOTE: this assumes we only ever run on 64-bit systems
+    machine = platform.machine().lower()
+    if 'arm' in machine or 'aarch' in machine:
+        queries.append(['arm64', 'aarch64'])
+    else:
+        queries.append(['amd64', 'x86_64'])
+
+    for asset in assets:
+        name = asset['name']
+        matches_ext = any(name.endswith(ext) for ext in extensions)
+        matches_query = all(any(q in name for q in qs) for qs in queries)
+
+        if matches_ext and matches_query:
+            return asset
+
+    return None
+
+
+def install_cmd(args):
     info('installing dotosaurus')
 
     links = []
@@ -78,6 +210,7 @@ def install(args):
     create_default_dir(os.path.expanduser('~/.local/share/vim/backup'))
 
     install_vim_plugins()
+    install_tools()
 
     if not has_branch('local'):
         info('creating branch "local"')
@@ -90,7 +223,8 @@ def install(args):
 
     success('dotosaurus installed')
 
-def update(args):
+
+def update_cmd(args):
     if subprocess.call(['git', 'diff', '--quiet']):
         die('commit or stash local changes before updating')
 
@@ -143,8 +277,10 @@ def update(args):
         success('updated submodules')
 
     install_vim_plugins()
+    install_tools(force=args.update_tools)
 
     success('update complete')
+
 
 def make_arg_parser():
     parser = argparse.ArgumentParser(description='install and update dotosaurus')
@@ -153,7 +289,7 @@ def make_arg_parser():
 
     # installation
     install_parser = subparsers.add_parser('install', description='install dotosaurus')
-    install_parser.set_defaults(action=install, conflict=None)
+    install_parser.set_defaults(action=install_cmd, conflict=None)
 
     conflict_group = install_parser.add_mutually_exclusive_group()
     conflict_group.add_argument('--force',
@@ -165,11 +301,14 @@ def make_arg_parser():
 
     # update
     update_parser = subparsers.add_parser('update', description='update dotosaurus')
-    update_parser.set_defaults(action=update)
+    update_parser.set_defaults(action=update_cmd)
     update_parser.add_argument('--continue', action='store_true', dest='continue_update',
                               help='continue update after resolving conflicts')
+    update_parser.add_argument('--update-tools', action='store_true', dest='update_tools',
+                              help='update all tools to the latest versions')
 
     return parser
+
 
 if __name__ == '__main__':
     dotosaurus = os.path.expanduser('~/.dotosaurus')

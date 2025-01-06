@@ -15,14 +15,12 @@ export LC_CTYPE=$LANG
 export PATH="${DOTOSAURUS}/bin:${PATH}"
 export PATH="${HOME}/bin:${PATH}"
 
-# zsh modules (copied from zplug)
-# ===============================
+# zsh core (copied from zplug)
+# ============================
 autoload -Uz regexp-replace
 autoload -Uz add-zsh-hook
 autoload -Uz colors
 autoload -Uz compinit
-
-colors
 
 zmodload zsh/system
 zmodload zsh/datetime
@@ -53,7 +51,9 @@ zmodload zsh/parameter
 
 # theme
 # =====
+colors
 setopt prompt_subst
+
 source ${DOTOSAURUS}/zsh/theme/wavelength.zsh-theme
 
 # local customizations
