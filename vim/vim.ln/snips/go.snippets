@@ -22,3 +22,15 @@ endsnippet
 snippet unimpl "An unimplemented statement"
 panic("TODO(`!v $USER`): unimplemented")
 endsnippet
+
+snippet handlerfunc "An HTTP handler function"
+http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+	${0:${VISUAL}}
+})
+endsnippet
+
+snippet handlermeth "An HTTP handler method"
+${1:ServeHTTP}(w http.ResponseWriter, r *http.Request) {
+	${0:${VISUAL}}
+}
+endsnippet
