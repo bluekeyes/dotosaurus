@@ -27,7 +27,7 @@ Plug 'JulesWang/css.vim'
 Plug 'b4b4r07/vim-hcl'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'digitaltoad/vim-jade'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'tag': 'v1.29' }
 Plug 'genoma/vim-less'
 Plug 'leafgarland/typescript-vim'
 Plug 'pangloss/vim-javascript'
